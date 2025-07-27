@@ -241,7 +241,9 @@ if st.button("Prever Nível de Obesidade"):
             
             
             predicted_class = prediction[0] 
-        
+            
+
+            transport_type = MTRANS_pt
 
             imc = Weight / (Height**2)
             healthy_meal_ratio = FCVC / NCP if NCP > 0 else 0
@@ -255,7 +257,6 @@ if st.button("Prever Nível de Obesidade"):
                 (1 if family_history_pt == 'Não' else 0))
             lifestyle_score = score
 
-            transport_type = MTRANS_pt
 
             label_map = {
                 0: 'Peso Insuficiente', 1: 'Peso Normal', 2: 'Sobrepeso Nível I',
