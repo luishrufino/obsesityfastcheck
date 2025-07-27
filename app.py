@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import joblib  # Usando joblib para mais robustez
+import joblib
 from utils import (
     FeatureEngineering, TrasformNumeric, MinMaxScalerFeatures, 
     LifestyleScore, ObesityMap, Model, DropNonNumeric, DropFeatures
@@ -17,7 +17,7 @@ def load_model():
     """Carrega o pipeline do arquivo uma única vez."""
     try:
         # Lembre-se de ajustar o caminho se 'app.py' estiver em uma subpasta
-        pipeline = joblib.load('streamlit_cloud/obesity_model.joblib')
+        pipeline = joblib.load('obesity_model.joblib')
         return pipeline
     except FileNotFoundError:
         st.error("Arquivo do modelo 'obesity_model.joblib' não encontrado.")
