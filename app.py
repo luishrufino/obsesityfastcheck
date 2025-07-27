@@ -256,7 +256,7 @@ if st.button("Prever Nível de Obesidade"):
             lifestyle_score = transformed_df['LifestyleScore'].iloc[0]
             healthy_meal_ratio = transformed_df['HealthyMealRatio'].iloc[0]
             activity_balance = transformed_df['ActivityBalance'].iloc[0]
-            transport_type = transformed_df['TransportType'].iloc[0]
+            transport_type = MTRANS_pt
 
             label_map = {
                 0: 'Peso Insuficiente', 1: 'Peso Normal', 2: 'Sobrepeso Nível I',
@@ -299,6 +299,6 @@ if st.button("Prever Nível de Obesidade"):
                 st.error(f"Ocorreu um erro durante a análise: {e}")
                 st.error("Verifique se todos os campos foram preenchidos corretamente.")
         pass 
-else:
+    else:
         st.error("O modelo não está carregado. O aplicativo não pode fazer predições.")
 
