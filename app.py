@@ -236,22 +236,26 @@ if st.button("Prever Nível de Obesidade"):
         try:
             transformed_df = pipeline[:-1].transform(features_df)
             prediction = pipeline.predict(features_df)
-            # st.write("🔎 Dados enviados para a API:")
-            # st.json(input_data)
-
-            
+           
             
             
             
             predicted_class = prediction[0] 
-            
+        
 
-    
-            imc = transformed_df['IMC'].iloc[0]
-            lifestyle_score = transformed_df['LifestyleScore'].iloc[0]
-            healthy_meal_ratio = transformed_df['HealthyMealRatio'].iloc[0]
-            activity_balance = transformed_df['ActivityBalance'].iloc[0]
-            transport_type = MTRANS_pt
+            imc = Weight / (Height**2)
+            healthy_meal_ratio = FCVC / NCP if NCP > 0 else 0
+            activity_balance = FAF - TUE
+            
+            # Para o LifestyleScore, replicamos a lógica com os valores 0 e 1
+            score = (
+                (1 if SMOKE_pt == 'Não' else 0) + 
+                (1 if SCC_pt == 'Sim' else 0) + 
+                (1 if FAVC_pt == 'Não' else 0) + 
+                (1 if family_history_pt == 'Não' else 0))
+            lifestyle_score = score
+
+            ransport_type = MTRANS_pt
 
             label_map = {
                 0: 'Peso Insuficiente', 1: 'Peso Normal', 2: 'Sobrepeso Nível I',

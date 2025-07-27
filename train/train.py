@@ -1,12 +1,12 @@
 import os
-import pickle
+import joblib
 import pandas as pd
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, mean_absolute_error, classification_report
 from shared.utils import FeatureEngineering, TrasformNumeric, MinMaxScalerFeatures, LifestyleScore, ObesityMap, Model, DropNonNumeric, DropFeatures
 
-url = 'https://raw.githubusercontent.com/luishrufino/obesity-predict-model/main/Obesity.csv'
+url = 'https://github.com/luishrufino/obsesityfastcheck/blob/main/Obesity.csv'
 obesity_df = pd.read_csv(url)
 
 pipeline = Pipeline([
@@ -39,8 +39,6 @@ print(f"MAE: {mae:.4f}")
 print(f"F1 Macro: {f1:.4f}")
 
 
-model_path = '/model_data/pipeline.pkl'
-os.makedirs(os.path.dirname(model_path), exist_ok=True)
-with open(model_path, 'wb') as f:
-    pickle.dump(pipeline, f)
-print(f"Modelo salvo em {model_path}")
+os.makedirs('models', exist_ok=True)
+model_path = 'models/obesity_model.joblib'
+joblib.dump(pipeline, model_path)

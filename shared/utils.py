@@ -15,8 +15,6 @@ class DropFeatures(BaseEstimator, TransformerMixin):
         X = X.copy()
         return X.drop(columns=self.feature_to_drop, errors='ignore')
 
-
-
 class FeatureEngineering(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         return self
