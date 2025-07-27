@@ -31,12 +31,6 @@ def load_model():
         return None
 
 
-st.write("PWD:", os.getcwd())
-st.write("Conteúdo do diretório:", os.listdir())
-st.write("Conteúdo de models/:", os.listdir("models"))
-st.write("MODEL_PATH existe?", MODEL_PATH.exists())
-st.write("Scikit-learn version:", sklearn.__version__)
-
 
 def gerar_analise_ia(imc, lifestyle_score, healthy_meal_ratio, activity_balance, transport_type, input_data):
     """
@@ -120,6 +114,7 @@ def gerar_analise_ia(imc, lifestyle_score, healthy_meal_ratio, activity_balance,
     5.  **Separe a análise de cada indicador por tópico. Deve ter 5 tópicos, 1 para cada indicador**
     6.  **Crie uma conclusão breve que resuma os pontos principais e incentive o usuário a buscar mais informações ou ajuda profissional.**
     7.  **Conside que o usuário está fazendo uma análise prévia, o objetivo da predição é auxiliar a tomada de decisão da equipe médica a diagnosticar a obesidade.**
+    8.  **Titulo em negrito, tamanho normal, por exemplo: **🔬 Análise de Saúde do Usuário**, todo o texto em tamanho normal, titulos e tópicos em negrito.**
 
         
     """
