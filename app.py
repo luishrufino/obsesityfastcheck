@@ -1,4 +1,5 @@
 import streamlit as st
+import sklearn
 import pandas as pd
 import joblib
 from pathlib import Path
@@ -33,6 +34,7 @@ st.write("PWD:", os.getcwd())
 st.write("Conteúdo do diretório:", os.listdir())
 st.write("Conteúdo de models/:", os.listdir("models"))
 st.write("MODEL_PATH existe?", MODEL_PATH.exists())
+st.write("Scikit-learn version:", sklearn.__version__)
 
 
 def gerar_analise_ia(imc, lifestyle_score, healthy_meal_ratio, activity_balance, transport_type, input_data):
@@ -298,3 +300,6 @@ if st.button("Prever Nível de Obesidade"):
         pass 
 else:
         st.error("O modelo não está carregado. O aplicativo não pode fazer predições.")
+
+
+st.write(input_data)
