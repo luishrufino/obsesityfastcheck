@@ -8,37 +8,23 @@ from utils import (
 import google.generativeai as genai
 
 
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, mean_absolute_error, classification_report
-from utils import FeatureEngineering, TrasformNumeric, MinMaxScalerFeatures, LifestyleScore, ObesityMap, Model, DropNonNumeric, DropFeatures
-
-url = 'https://raw.githubusercontent.com/luishrufino/obesity-predict-model/main/Obesity.csv'
-obesity_df = pd.read_csv(url)
-
-pipeline = Pipeline([
-    ('drop_feature', DropFeatures()),
-    ('feature_engineering', FeatureEngineering()),
-    ('transform_numeric', TrasformNumeric()),
-    ('min_max_scaler', MinMaxScalerFeatures()),
-    ('dropnon_numeric', DropNonNumeric()),
-    ('lifestyle_score', LifestyleScore()),
-    ('model', Model())
-])
-
-
-X = obesity_df.drop(columns=['Obesity'])
-y = ObesityMap().fit_transform(obesity_df['Obesity'])
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-
-pipeline.fit(X_train, y_train)
-
-
 # 2. CONFIGURAÇÃO DA PÁGINA (PRIMEIRO COMANDO STREAMLIT)
 st.set_page_config(page_title="ObesityFastCheck", layout="centered")
 
-
+# 3. FUNÇÕES AUXILIARES
+@st.cache_resource
+def load_model():
+    """Carrega o pipeline do arquivo uma única vez."""
+    try:
+        # Lembre-se de ajustar o caminho se 'app.py' estiver em uma subpasta
+        pipeline = joblib.load('models/obesity_model.joblib')
+        return pipeline
+    except FileNotFoundError:
+        st.error("Arquivo do modelo 'obesity_model.joblib' não encontrado.")
+        return None
+    except Exception as e:
+        st.error(f"Erro ao carregar o modelo: {e}")
+        return None
 
 
 
@@ -137,7 +123,7 @@ def gerar_analise_ia(imc, lifestyle_score, healthy_meal_ratio, activity_balance,
     
 
 # 4. CARREGAMENTO DO MODELO
-pipeline = pipeline
+pipeline = load_model()
 
 # 5. INTERFACE DO USUÁRIO
 st.title("🔬 ObesityFastCheck")
