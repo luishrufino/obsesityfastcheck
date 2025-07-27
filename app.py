@@ -302,5 +302,3 @@ if st.button("Prever Nível de Obesidade"):
 else:
         st.error("O modelo não está carregado. O aplicativo não pode fazer predições.")
 
-
-st.write(input_data)
