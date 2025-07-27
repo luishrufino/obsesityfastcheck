@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 from pathlib import Path
 import os
-from utils import (
+from shared.utils import (
     FeatureEngineering, TrasformNumeric, MinMaxScalerFeatures, 
     LifestyleScore, ObesityMap, Model, DropNonNumeric, DropFeatures
 )
