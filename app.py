@@ -17,7 +17,7 @@ def load_model():
     """Carrega o pipeline do arquivo uma única vez."""
     try:
         # Lembre-se de ajustar o caminho se 'app.py' estiver em uma subpasta
-        pipeline = joblib.load('model/obesity_model.joblib')
+        pipeline = joblib.load('models/obesity_model.joblib')
         return pipeline
     except FileNotFoundError:
         st.error("Arquivo do modelo 'obesity_model.joblib' não encontrado.")
