@@ -1,47 +1,45 @@
 
 # 🧠 Obesity FastCheck
 
-**Obesity FastCheck** é uma aplicação interativa para prever o nível de obesidade com base em dados de hábitos e estilo de vida. O sistema utiliza um modelo de machine learning treinado com dados públicos, uma API REST com Flask e uma interface amigável em Streamlit.
+**Obesity FastCheck** é uma aplicação web interativa que utiliza **Machine Learning** para prever o nível de obesidade e **Inteligência Artificial Generativa (Google Gemini)** para fornecer uma análise educativa e personalizada com base nos dados do usuário.
+
+A aplicação é construída inteiramente em Python e Streamlit, oferecendo uma experiência unificada sem a necessidade de uma API externa.
 
 ---
 
-## 🚀 Visão Geral
+## ✨ Visão Geral
 
-Este projeto tem como objetivo fornecer uma **análise rápida e educativa** sobre fatores relacionados à obesidade. Ele entrega:
+Este projeto foi redesenhado para ser uma ferramenta "all-in-one" que entrega:
 
-- 🎯 Predição de nível de obesidade com base em dados individuais
-- 📊 Indicadores interpretáveis como IMC, estilo de vida e hábitos alimentares
-- 🔄 Comunicação entre frontend (Streamlit) e backend (Flask API)
+- 🎯 Predição de Nível de Obesidade: Utiliza um modelo Scikit-learn (RandomForest: Accuracy 98,11%) treinado para classificar o perfil do usuário em 7 categorias de peso.
+
+- 🤖 Análise com IA Generativa: Conecta-se diretamente à API do Google Gemini para criar uma análise de saúde personalizada e educativa com base nos resultados.
+
+- 📊 Indicadores de Saúde: Calcula e explica métricas importantes como IMC, pontuação de estilo devida, balanço de atividades e mais.
+
+- 🚀 Simplicidade e Performance: Roda como uma aplicação única no Streamlit Community Cloud, garantindo facilidade no deploy e manutenção.
+
 
 ---
 
 ## 🧱 Estrutura do Projeto
 
 ```bash
-obesity-predict-model/
-│
-├── api/               # API Flask para expor o modelo via HTTP
-│   ├── app.py
-│   ├── Dockerfile
-│   └── requirements.txt
-│
-├── streamlit/         # Interface de usuário (frontend)
-│   ├── app.py
-│   ├── Dockerfile
-│   └── requirements.txt
-│
+obesityfastcheck/
 ├── train/             # Script de treinamento do modelo
 │   ├── train.py
-│   ├── Dockerfile
 │   └── requirements.txt
 │
-├── shared/            # Código compartilhado (ex: engenharia de features, utils)
+├── models/             # Modelo treinado
+│   ├── obesity_model.joblib
+│
+├── shared/            # Módulos de engenharia de features
 │   ├── utils.py
-│   └── Dockerfile     # (opcional) imagem base de dependências comuns
 │
 ├── Obesity.csv        # Base de dados original
-├── docker-compose.yml # Orquestração dos serviços (API + UI)
-├── start.ps1          # Script PowerShell para iniciar os containers (Windows)
+├── app.py             # Streamlit integrado com ML e IA
+├── data_model.ipynb   # arquivo de testes e análises gerais
+├── requirements.txt           
 └── README.md
 
 ```
@@ -65,49 +63,74 @@ obesity-predict-model/
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/luishrufino/obesity-predict-model.git
-cd obesity-predict-model
+git clone https://github.com/luishrufino/obesityfastcheck.git
+cd obesityfastcheck
 ```
 
 ### 2. Treinar o modelo
 
 ```bash
 cd train
-python train_model.py
+python train.py
 ```
 
-O modelo será salvo em `shared/model.pkl`.
+O modelo será salvo em `models/obesity_model.joblib`.
 
-### 3. Rodar com Docker Compose
+### 3. Configurar o Ambiente Virtual e Instalar Dependências
 
 ```bash
-docker-compose up --build
+# Criar ambiente virtual
+python -m venv venv
+
+# Ativar o ambiente (Windows)
+venv\Scripts\activate
+# Ativar o ambiente (Linux/Mac)
+source venv/bin/activate
+
+# Instalar as dependências
+pip install -r requirements.txt
 ```
 
-- A API estará disponível em: `http://localhost:5000/predict`
-- A interface Streamlit estará em: `http://localhost:8501`
+### 4. Configurar a Chave de API do Google
 
----
+- Crie um arquivo chamado secrets.toml dentro de uma pasta .streamlit:
+  ```bash
+  mkdir .streamlit
+  touch .streamlit/secrets.toml
+  ```
+- Adicione sua chave de API ao arquivo secrets.toml neste formato:
+  ```bash
+  # .streamlit/secrets.toml
+  GOOGLE_API_KEY="SUA_CHAVE_DE_API_AQUI"
+  ```
 
-## 🌐 Deploy no Render
-
-- Crie **dois serviços Web**: um para `api/` (Flask) e outro para `streamlit/`
-- Certifique-se que o app Streamlit consome a URL da API correta (`https://api-obesity.onrender.com/predict`)
-
----
-
-## 🧪 Exemplo de Chamada à API
+### 5. Rodar a Aplicação Streamlit
 
 ```bash
-curl -X POST http://localhost:5000/predict      -H "Content-Type: application/json"      -d '{"Age": 25, "Height": 1.75, "Weight": 80, ...}'
+streamlit run app.py
 ```
+
+---
+## 🌐 Deploy no Streamlit Community Cloud
+
+O deploy desta aplicação é muito simples:
+1. Fork este repositório para a sua conta do **GitHub**.
+2. Acesse o Streamlit Community Cloud: <https://streamlit.io/cloud>.
+3. Clique em **"New app"** e conecte seu repositório do GitHub.
+4. Selecione o repositório **obesityfastcheck e o arquivo app.py**.
+5. Vá para a seção **"Advanced settings..."** e adicione seus "Secrets". O conteúdo será o mesmo do seu arquivo secrets.toml:
+```bash
+GOOGLE_API_KEY="SUA_CHAVE_DE_API_AQUI"
+```
+
+6. Clique em "Deploy!". Sua aplicação estará online em poucos minutos.
 
 ---
 
 ## 📌 Observações
 
 - Esta aplicação **não substitui diagnóstico médico**.
-- O modelo foi treinado com base em dados simulados e deve ser usado com fins educativos e preventivos.
+- O modelo foi treinado com fins educativos para auxiliar na conscientização sobre hábitos de saúde.
 
 ---
 
