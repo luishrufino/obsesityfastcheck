@@ -15,7 +15,8 @@ import google.generativeai as genai
 st.set_page_config(page_title="ObesityFastCheck", layout="centered")
 
 # 3. FUNÇÕES AUXILIARES
-MODEL_PATH = Path(__file__).parent / "models" / "obesity_model.joblib"
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR / "models" / "obesity_model.joblib"
 
 @st.cache_resource
 def load_model():
