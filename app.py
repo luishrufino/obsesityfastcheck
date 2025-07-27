@@ -255,7 +255,7 @@ if st.button("Prever Nível de Obesidade"):
                 (1 if family_history_pt == 'Não' else 0))
             lifestyle_score = score
 
-            ransport_type = MTRANS_pt
+            transport_type = MTRANS_pt
 
             label_map = {
                 0: 'Peso Insuficiente', 1: 'Peso Normal', 2: 'Sobrepeso Nível I',
