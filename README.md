@@ -11,7 +11,7 @@ A aplicação é construída inteiramente em Python e Streamlit, oferecendo uma 
 
 Este projeto foi redesenhado para ser uma ferramenta "all-in-one" que entrega:
 
-- 🎯 Predição de Nível de Obesidade: Utiliza um modelo Scikit-learn treinado para classificar o perfil do usuário em 7 categorias de peso.
+- 🎯 Predição de Nível de Obesidade: Utiliza um modelo Scikit-learn (RandomForest: Accuracy 98,11%) treinado para classificar o perfil do usuário em 7 categorias de peso.
 
 - 🤖 Análise com IA Generativa: Conecta-se diretamente à API do Google Gemini para criar uma análise de saúde personalizada e educativa com base nos resultados.
 
