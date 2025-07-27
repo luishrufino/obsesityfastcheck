@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import joblib
+from pathlib import Path
+import os
 from utils import (
     FeatureEngineering, TrasformNumeric, MinMaxScalerFeatures, 
     LifestyleScore, ObesityMap, Model, DropNonNumeric, DropFeatures
@@ -12,20 +14,25 @@ import google.generativeai as genai
 st.set_page_config(page_title="ObesityFastCheck", layout="centered")
 
 # 3. FUNÇÕES AUXILIARES
+MODEL_PATH = Path(__file__).parent / "models" / "obesity_model.joblib"
+
 @st.cache_resource
 def load_model():
-    """Carrega o pipeline do arquivo uma única vez."""
     try:
-        # Lembre-se de ajustar o caminho se 'app.py' estiver em uma subpasta
-        pipeline = joblib.load('models/obesity_model.joblib')
+        pipeline = joblib.load(MODEL_PATH)
         return pipeline
     except FileNotFoundError:
-        st.error("Arquivo do modelo 'obesity_model.joblib' não encontrado.")
+        st.error(f"Modelo não encontrado em: {MODEL_PATH.resolve()}")
         return None
     except Exception as e:
         st.error(f"Erro ao carregar o modelo: {e}")
         return None
 
+
+st.write("PWD:", os.getcwd())
+st.write("Conteúdo do diretório:", os.listdir())
+st.write("Conteúdo de models/:", os.listdir("models"))
+st.write("MODEL_PATH existe?", MODEL_PATH.exists())
 
 
 def gerar_analise_ia(imc, lifestyle_score, healthy_meal_ratio, activity_balance, transport_type, input_data):
