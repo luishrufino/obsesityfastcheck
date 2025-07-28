@@ -1,5 +1,5 @@
 
-# 🧠 Obesity FastCheck: https://obsesityfastcheck-gbiqph9l9czs3hg3krvpeu.streamlit.app/
+# 🧠 Obesity FastCheck: 
 
 **Obesity FastCheck** é uma aplicação web interativa que utiliza **Machine Learning** para prever o nível de obesidade e **Inteligência Artificial Generativa (Google Gemini)** para fornecer uma análise educativa e personalizada com base nos dados do usuário.
 
@@ -112,6 +112,8 @@ streamlit run app.py
 
 ---
 ## 🌐 Deploy no Streamlit Community Cloud
+
+Acesso online: https://obsesityfastcheck-gbiqph9l9czs3hg3krvpeu.streamlit.app/
 
 O deploy desta aplicação é muito simples:
 1. Fork este repositório para a sua conta do **GitHub**.
