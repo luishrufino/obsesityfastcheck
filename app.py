@@ -148,8 +148,8 @@ mtrans_map = {
 }
 
 # Entradas numéricas
-Height = st.number_input("Altura (em metros)", min_value=1.0, max_value=2.5, value=1.85, format="%.2f")
-Weight = st.number_input("Peso (em kg)", min_value=30.0, max_value=200.0, value=86.0, format="%.2f")
+Height = st.number_input("Altura (em metros)", min_value=1.0, max_value=2.5, format="%.2f")
+Weight = st.number_input("Peso (em kg)", min_value=30.0, max_value=200.0, format="%.2f")
 Gender_pt = st.radio("Gênero", list(gender_map.keys()), horizontal=True)
 
 FCVC = st.slider("Frequência de consumo de vegetais (FCVC: 1 não consome, 2 uma ou duas vezes, 3 três vezes ou mais)", 1, 3, 1, step=1)
